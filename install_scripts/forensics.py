@@ -17,7 +17,7 @@ def install_volatility3():
         subprocess.check_call(["python3", "-m", "pip", "install", "-r", f"{package_folder}/volatility3/requirements.txt"],
             stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
         os.chdir(f"{package_folder}/volatility3")
-        subprocess.check_call(["python3", "setyp.py", "build"],
+        subprocess.check_call(["python3", "setup.py", "build"],
             stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
         print("Package installed successfully : volatility3")
     except subprocess.CalledProcessError as e:
