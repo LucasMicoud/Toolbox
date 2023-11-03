@@ -10,25 +10,27 @@ requirements = [
 
 def install_john():
     try:
-        subprocess.check_call(["git", "clone", "https://github.com/openwall/john", "-o", f"{package_folder}/john"])
+        subprocess.check_call(["git", "clone", "https://github.com/openwall/john", f"{package_folder}/john"],
+            stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
         os.chdir(f"{package_folder}/john/src")
-        subprocess.check_call(["./configure"])
-        subprocess.check_call(["make"])
+        subprocess.check_call(["./configure"],
+            stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        subprocess.check_call(["make"], 
+            stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
         print("Package installed successfully : john")
     except subprocess.CalledProcessError as e:
         print(f"Error installing package john: {e}")
-    except FileNotFoundError:
-        print("apt-get command not found. Make sure you are running this on a Debian/Ubuntu-based system.")
 
 
 def install_requirements():
     try:
-        subprocess.check_call(["sudo", "apt", "install", "-y"] + requirements)
+        subprocess.check_call(["sudo", "apt", "install", "-y"] + requirements,
+            stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
         print("Requirements installed successfully")
     except subprocess.CalledProcessError as e:
         print(f"Error installing packages: {e}")
     except FileNotFoundError:
-        print("apt-get command not found. Make sure you are running this on a Debian/Ubuntu-based system.")
+        print("apt command not found. Make sure you are running this on a Debian/Ubuntu-based system.")
 
 def install_crypto():
     print("Installing crypto requirements...")
