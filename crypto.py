@@ -34,5 +34,7 @@ def install_crypto():
     print("Installing crypto requirements...")
     install_requirements()
     print("Installing crypto packages...")
-    os.mkdir(package_folder)
+    if not os.path.exists(package_folder):
+        os.mkdir(package_folder)
+    install_john()
 
