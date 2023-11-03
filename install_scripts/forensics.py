@@ -15,7 +15,7 @@ def install_volatility3():
     try:
         # Clone repository
         if os.path.exists(f"{package_folder}/volatility3"):
-            shutil.rmtree("f{package_folder}/volatility3")
+            shutil.rmtree(f"{package_folder}/volatility3")
         subprocess.check_call(["git", "clone", "https://github.com/volatilityfoundation/volatility3", f"{package_folder}/volatility3"],
             stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
         # Build
