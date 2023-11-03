@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-from utils import install_requirements
+from install_scripts.utils import install_requirements
 
 package_folder = "Crypto"
 
