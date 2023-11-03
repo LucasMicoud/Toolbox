@@ -1,9 +1,11 @@
 import os
 import subprocess
 
+from utils import install_requirements
+
 package_folder = "Crypto"
 
-requirements = [
+crypto_requirements = [
     "libssl-dev",
     "openssl",
 ]
@@ -15,26 +17,16 @@ def install_john():
         os.chdir(f"{package_folder}/john/src")
         subprocess.check_call(["./configure"],
             stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-        subprocess.check_call(["make"], 
+        subprocess.check_call(["make"],
             stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
         print("Package installed successfully : john")
     except subprocess.CalledProcessError as e:
         print(f"Error installing package john: {e}")
 
 
-def install_requirements():
-    try:
-        subprocess.check_call(["sudo", "apt", "install", "-y"] + requirements,
-            stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-        print("Requirements installed successfully")
-    except subprocess.CalledProcessError as e:
-        print(f"Error installing packages: {e}")
-    except FileNotFoundError:
-        print("apt command not found. Make sure you are running this on a Debian/Ubuntu-based system.")
-
 def install_crypto():
     print("Installing crypto requirements...")
-    install_requirements()
+    install_requirements(crypto_requirements)
     print("Installing crypto packages...")
     if not os.path.exists(package_folder):
         os.mkdir(package_folder)

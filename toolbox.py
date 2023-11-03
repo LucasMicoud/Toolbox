@@ -1,32 +1,27 @@
 import argparse
 
-from crypto import install_crypto
+from install_scripts.crypto import install_crypto
+from install_scripts.forensics import install_forensics
 
 def install_all():
     print("Installing all packages...")
     install_basics()
     install_crypto()
-    install_forensic()
+    install_forensics()
 
-
-def install_forensic():
-    print("Installing forensic packages...")
-    # Add your forensic package installation code here
 
 def install_basics():
     print("Installing basic packages...")
-    # Add your basic package installation code here
 
 def list_packages():
     print("Listing installed packages...")
-    # Add your code to list the installed packages here
 
 def main():
     parser = argparse.ArgumentParser(description="Package Installation and Listing Script")
     subparsers = parser.add_subparsers(title="Actions", dest="action")
 
     install_parser = subparsers.add_parser("install", help="Install packages")
-    install_parser.add_argument("package", choices=["basics", "crypto", "forensic"], help="Package to install")
+    install_parser.add_argument("package", choices=["basics", "crypto", "forensics"], help="Package to install")
 
     list_parser = subparsers.add_parser("list", help="List available packages")
 
@@ -39,8 +34,8 @@ def main():
             install_basics()
         elif args.package == "crypto":
             install_crypto()
-        elif args.package == "forensic":
-            install_forensic()
+        elif args.package == "forensics":
+            install_forensics()
     elif args.action == "list":
         list_packages()
     else:
