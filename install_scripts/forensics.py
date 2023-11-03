@@ -12,8 +12,9 @@ forensics_requirements = [
 
 def install_volatility3():
     try:
-        subprocess.check_call(["git", "clone", "https://github.com/volatilityfoundation/volatility3", f"{package_folder}/volatility3"],
-            stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        if not os.path.exists(f"{package_folder}/volatility3"):
+            subprocess.check_call(["git", "clone", "https://github.com/volatilityfoundation/volatility3", f"{package_folder}/volatility3"],
+                stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
         subprocess.check_call(["python3", "-m", "pip", "install", "-r", f"{package_folder}/volatility3/requirements.txt"],
             stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
         os.chdir(f"{package_folder}/volatility3")

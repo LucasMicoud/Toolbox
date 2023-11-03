@@ -12,8 +12,9 @@ crypto_requirements = [
 
 def install_john():
     try:
-        subprocess.check_call(["git", "clone", "https://github.com/openwall/john", f"{package_folder}/john"],
-            stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        if not os.path.exists(f"{package_folder}/john"):
+            subprocess.check_call(["git", "clone", "https://github.com/openwall/john", f"{package_folder}/john"],
+                stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
         os.chdir(f"{package_folder}/john/src")
         subprocess.check_call(["./configure"],
             stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
