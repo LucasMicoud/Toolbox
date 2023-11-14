@@ -2,12 +2,14 @@ import argparse
 
 from install_scripts.crypto import install_crypto
 from install_scripts.forensics import install_forensics
+from install_scripts.reverse import install_reverse
 
 def install_all():
     print("Installing all packages...")
     install_basics()
     install_crypto()
     install_forensics()
+    install_reverse()
 
 
 def install_basics():
@@ -21,7 +23,7 @@ def main():
     subparsers = parser.add_subparsers(title="Actions", dest="action")
 
     install_parser = subparsers.add_parser("install", help="Install packages")
-    install_parser.add_argument("package", choices=["basics", "crypto", "forensics"], help="Package to install")
+    install_parser.add_argument("package", choices=["basics", "crypto", "forensics", "reverse"], help="Package to install")
 
     list_parser = subparsers.add_parser("list", help="List available packages")
 
@@ -36,6 +38,8 @@ def main():
             install_crypto()
         elif args.package == "forensics":
             install_forensics()
+        elif args.package == "reverse":
+            install_reverse()
     elif args.action == "list":
         list_packages()
     else:
